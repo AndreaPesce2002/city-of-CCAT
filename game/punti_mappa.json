@@ -1,0 +1,77 @@
+{
+    "casa di Andrea": {
+        "pos": [520, 60],
+        "collegati": [
+            "strada casa Andrea e negozio"
+        ]
+    },
+    "strada casa Andrea e negozio": {
+        "pos": [500, 128],
+        "collegati": [
+            "casa di Andrea",
+            "incrocio",
+            "strada davanti casa Anna",
+            "negozio"
+        ]
+    },
+    "incrocio": {
+        "pos": [320, 120],
+        "collegati": [
+            "strada casa Andrea e negozio",
+            "strada davanti casa Luca",
+            "piazza",
+            "campo andrea"
+        ]
+    },
+    "strada davanti casa Anna": {
+        "pos": [665, 130],
+        "collegati": [
+            "strada casa Andrea e negozio",
+            "spiaggia",
+            "casa di anna"
+        ]
+    },
+    "casa di Anna":{
+        "pos": [680, 60],
+        "collegati": [
+            "strada davanti casa Anna"
+        ]
+    },
+    "spiaggia": {
+        "pos": [670, 450],
+        "collegati": [
+            "strada davanti casa Anna"
+        ]
+    },
+    "negozio": {
+        "pos": [500, 230],
+        "collegati": [
+            "strada casa Andrea e negozio"
+        ]
+    },
+    "piazza": {
+        "pos": [320, 60],
+        "collegati": [
+            "incrocio"
+        ]
+    },
+    "campo di Andrea": {
+        "pos": [120, 300],
+        "collegati": [
+            "incrocio"
+        ]
+    },
+    "strada davanti casa Luca": {
+        "pos": [90, 130],
+        "collegati": [
+            "incrocio",
+            "casa di luca"
+        ]
+    },
+    "casa di Luca": {
+        "pos": [90, 50],
+        "collegati": [
+            "strada davanti casa Luca"
+        ]
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "Anna":{
+        "port":1866,
+        "impostazioni":{
+            "prompt_prefix": "sei un giovane ragazza di nome Anna di 25 anni, sei molto intelligente e curiosa, vivi in una piccola cittadina di campagna e sei felice di vivere li, lavori nel negozio dei tuoi genitori ma stai studiando per andare all'università",
+            "max_caratteri": 250,
+            "episodic_memory_k": 3,
+            "episodic_memory_threshold": 0.7,
+            "declarative_memory_k": 3,
+            "declarative_memory_threshold": 0.7,
+            "procedural_memory_k": 3,
+            "procedural_memory_threshold": 0.7,
+            "user_name": "Andrea",
+            "language": "italiano"
+        }
+    },
+    "Andrea":{
+        "port":1867,
+        "impostazioni":{
+            "prompt_prefix": "sei un giovane ragazzo di nome Andrea di 20 anni, sei molto intelligente e curiosa, vivi in una piccola cittadina di campagna e sei felice di vivere li, lavori nei campi ereditati da tuo nonno",
+            "max_caratteri": 250,
+            "episodic_memory_k": 3,
+            "episodic_memory_threshold": 0.7,
+            "declarative_memory_k": 3,
+            "declarative_memory_threshold": 0.7,
+            "procedural_memory_k": 3,
+            "procedural_memory_threshold": 0.7,
+            "user_name": "Anna",
+            "language": "italiano"
+        }
+    },
+    "Luca": {
+        "port": 1868,
+        "impostazioni": {
+            "prompt_prefix": "sei un giovane ragazzo di nome Luca di 20 anni, sei estremamente malizioso ma anche molto buono, vivi in una piccola cittadina di campagna preferiresti vivere al mare, sei disoccupato e in cerca di lavoro",
+            "max_caratteri": 250,
+            "episodic_memory_k": 3,
+            "episodic_memory_threshold": 0.7,
+            "declarative_memory_k": 3,
+            "declarative_memory_threshold": 0.7,
+            "procedural_memory_k": 3,
+            "procedural_memory_threshold": 0.7,
+            "user_name": "Anna",
+            "language": "italiano"
+        }
+    }
+
+}
