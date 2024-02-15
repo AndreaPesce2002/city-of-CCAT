@@ -4,7 +4,7 @@ Benvenuti nella Città dei CCAT, un luogo dove l'intelligenza artificiale e le f
 
 In questa piccola cittadina, le AI vivranno in perfetta armonia, passeggeranno tra le molteplici strutture della città e comunicheranno pacificamente.
 ## Significato di CCAT
-iIl CCAT è l'anima dei nostri cittadini. Grazie a Piero Savastano e al suo progetto  [cheshire-cat-ai](https://github.com/cheshire-cat-ai/core), sono riuscito a dare vita a una vera e propria civiltà.
+iIl CCAT è l'anima dei nostri cittadini. Grazie a [Piero Savastano](https://www.linkedin.com/in/piero-savastano-523b3016/?originalSubdomain=it) e al suo progetto  [cheshire-cat-ai](https://github.com/cheshire-cat-ai/core), sono riuscito a dare vita a una vera e propria civiltà.
 
 ## Come funziona
 
