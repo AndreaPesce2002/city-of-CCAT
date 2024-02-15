@@ -14,6 +14,8 @@ Idealmente, tutto dovrebbe essere già pronto con 3 cittadini pronti all'uso. Tu
 
     Una volta caricato, avviate il cheshire-cat-ai e inserite il LLM (consigliabile utilizzarne uno gratuito). Poi caricate alcune informazioni di base che volete che gli abitanti abbiano, come una mappa del luogo o dei file necessari.
 
+    **Importante**: Ogni volta che apportate modifiche all'`agente_base`, assicuratevi di eliminare le cartelle dei vostri agenti. Si ricreeranno automaticamente in futuro quando eseguirete il file `avviaDOcker.py`.
+
 - Il secondo passo è generare numerosi cheshire-cat e dare ad ognuno la propria personalità. Potete utilizzare il file [agenti.json](https://github.com/AndreaPesce2002/city-of-ccat/blob/master/caratteristiche_agenti/agenti.json)
   ```json
   {
