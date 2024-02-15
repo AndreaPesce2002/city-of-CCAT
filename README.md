@@ -74,6 +74,8 @@ Ora che i nostri cittadini sono pronti, basta solo spedirli nel meraviglioso vil
 I cittadini non sono obbligati a parlare e viaggiare all'interno del villaggio se non lo desiderate. Utilizzando la classe `converection` che si trova in `collegamento_2.py`, potete far parlare i vostri cittadini con il seguente codice:
 
 ```python
+from collegamento_2 import converection
+
 con=converection() #permetti il collegamento
 
 # con i primi due attributi scegliete i cittadini il rpimo sarà sempre quello che inizia la conversazione
