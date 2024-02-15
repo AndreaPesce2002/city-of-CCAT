@@ -146,7 +146,7 @@ class converection:
                             if destinazioneDesiderata not in self.posti:
                                 # Se la posizione desiderata non esiste, inviamo un messaggio di errore all'utente
                                 self.agenti[destinatario].send(message=f"""mi spiace ma questo posto non esiste ecco i posti possibili: 
-                                                                        {', '.join(self.posti)} 
+                                                                        {self.posti}
                                                                         
                                                                         usa la forma:
                                                                                 -posizione: XXX
@@ -161,8 +161,8 @@ class converection:
 
                         else:
                             # Se la posizione esiste, possiamo procedere con la logica successiva...
-                            self.agenti[destinatario].send(message=f"""mi spiace ma la risposta non è coretta ecco i posti possibili: 
-                                                                    {', '.join(self.posti)} 
+                            self.agenti[destinatario].send(message=f"""mi spiace ma la risposta non è valida ecco i posti possibili: 
+                                                                    {self.posti} 
                                                                     
                                                                     usa la forma:
                                                                             -posizione: XXX
@@ -183,8 +183,10 @@ class converection:
                             # Se il messaggio contiene il segnale di fine conversazione
                             if '§' in contenuto_messaggio:
                                 self.fine_conversazione[client_name] = True
-                                #contenuto_messaggio = contenuto_messaggio.replace('§', '').strip()
-
+                                contenuto_messaggio = contenuto_messaggio.replace('§', '').strip()
+                            
+                            self.personaggi[client_name].mostra_mesaggio(contenuto_messaggio)
+                            
                             # Determiniamo l'agente destinatario basandoci sulla coppia_conversante
                             self.agenti[destinatario].send(message=contenuto_messaggio)
 
@@ -210,6 +212,7 @@ class converection:
 
 
 #utilizzo
+##utilizzo per decidere la posizione
 # con=converection()
 # conversazione = con.crea_messaggio()
 # con.creaConversazione('Andrea','Andrea',conversazione)
@@ -217,8 +220,6 @@ class converection:
 
 # print(f"Posizione: {con.posizioneDesiderata}, Tempo: {con.tempo}")
 
-
-
-
+##utilizzo per parlare
 # con.creaConversazione('Luca','Anna', '*ti sei trovato con Anna per discutere di Andrea*')
 # con.chiudiSessione()

@@ -17,8 +17,6 @@ from collegamento_2 import converection
 # Inizializzazione di Pygame
 pygame.init()
 
-con = converection()
-
 # Creiamo la rete a partire dal nostro JSON
 rete_stradale = nx.Graph()
 
@@ -64,7 +62,12 @@ def trova_percorso(posizione_iniziale, destinazione):
             print(f"Curioso! Sembrerebbe che anche {destinazione_casuale} sia irraggiungibile. Che enigma!")
             return None
 
+def creaNuovaConnesione():
+    con = converection()
+    for nome, dettagli in agenti.items():
+        con.personaggi[nome]=personaggio
 
+    return con
 # Creazione dei personaggi
 class Personaggio:
     def __init__(self, nome, posizione_iniziale, punti_mappa):
@@ -82,6 +85,23 @@ class Personaggio:
         self.imposta_destinazione(random.choice(list(punti_mappa.keys())))
         self.staComunicando=False
         
+    def mostra_mesaggio(self,testo_messaggio):
+        if self.staComunicando:
+            font = pygame.font.SysFont(None, 24)
+            immagine_messaggio = font.render(testo_messaggio, True, (255, 255, 255))
+            
+            # Calcola le dimensioni del testo per posizionare adeguatamente lo sfondo
+            larghezza_testo, altezza_testo = font.size(testo_messaggio)
+            
+            # Aggiungi uno sfondo nero intorno al messaggio
+            sfondo = pygame.Rect(self.posizione[0] - 30, self.posizione[1] - 70, larghezza_testo + 10, altezza_testo + 10)
+            pygame.draw.rect(schermo, (0, 0, 0), sfondo)
+            
+            # Disegna il messaggio sullo sfondo nero
+            schermo.blit(immagine_messaggio, (self.posizione[0] - 25, self.posizione[1] - 60))
+            
+            # Aggiorna il display
+            pygame.display.flip()
         
     def trova_nome_per_posizione(self,posizione, punti_mappa):
         for nome, attributi in punti_mappa.items():
@@ -111,38 +131,37 @@ class Personaggio:
     def gestisci_comunicazione(self, pers):
             posizione_attuale = self.percorso[self.indice_percorso-1] if self.percorso else None
             if posizione_attuale:
-                pers.staComunicando=True
-                self.staComunicando=True
-                con.creaConversazione(self.nome,pers.nome, f'*hai trovato {pers.nome} in {self.trova_nome_per_posizione(posizione_attuale, self.punti_mappa)}*')
-                con.chiudiSessione()
-                pers.staComunicando=False
-                self.staComunicando=False
-                time.sleep(5)  # Aspetta 5 secondi
+                if not (pers.staComunicando or self.staComunicando):
+                    pers.staComunicando=True
+                    self.staComunicando=True
+                    con=creaNuovaConnesione()
+                    con.creaConversazione(self.nome,pers.nome, f'*hai trovato {pers.nome} in {self.trova_nome_per_posizione(posizione_attuale, self.punti_mappa)}*')
+                    con.chiudiSessione()
+                    pers.staComunicando=False
+                    self.staComunicando=False
+                    time.sleep(5)  # Aspetta 5 secondi
 
     def segui_percorso(self):
-    
-        
-        # Verifichiamo se siamo arrivati all'ultima destinazione
-        if self.indice_percorso == len(self.percorso): # Ultima destinazione del percorso
-            # Controlliamo se il tempo di attesa è trascorso
-            if (time.time() - self.ultimo_tempo_di_fermo) >= self.tempo_di_attesa:
-                
-                conversazione = con.crea_messaggio()
-                con.creaConversazione(self.nome,self.nome,conversazione)
-                con.chiudiSessione()
-                
-                # self.tempo_di_attesa=int(con.tempo)/100
-                # # Il personaggio ha aspettato abbastanza, può muoversi verso una nuova avventura
-                # self.imposta_destinazione(con.posizioneDesiderata)
-                
-                #self.imposta_destinazione(random.choice(list(punti_mappa.keys())))
-                
-                self.ultimo_tempo_di_fermo = time.time() # Reset del tempo di fermo
-            # Non abbiamo bisogno di muoverci finché non è trascorso il tempo di attesa
-            return
-
 
         if not self.staComunicando:
+            
+            # Verifichiamo se siamo arrivati all'ultima destinazione
+            if self.indice_percorso == len(self.percorso): # Ultima destinazione del percorso
+                # Controlliamo se il tempo di attesa è trascorso
+                if (time.time() - self.ultimo_tempo_di_fermo) >= self.tempo_di_attesa:
+                    
+                    con=creaNuovaConnesione()
+                    conversazione = con.crea_messaggio()
+                    con.creaConversazione(self.nome,self.nome,conversazione)
+                    con.chiudiSessione()
+                    
+                    #self.imposta_destinazione(random.choice(list(punti_mappa.keys())))
+                    
+                    self.ultimo_tempo_di_fermo = time.time() # Reset del tempo di fermo
+                # Non abbiamo bisogno di muoverci finché non è trascorso il tempo di attesa
+                return
+
+        
             # Se non è l'ultima destinazione, continuo il percorso come prima
             destinazione = self.percorso[self.indice_percorso]
             if self.posizione == destinazione:
@@ -187,7 +206,6 @@ for nome, dettagli in agenti.items():
     posizione_iniziale = dettagli.get('posizione_iniziale', random.choice(list(punti_mappa.keys())))
     personaggio = Personaggio(nome, posizione_iniziale, punti_mappa)
     personaggi.append(personaggio)
-    con.personaggi[nome]=personaggio
 
 # Funzione per disegnare gli elementi del gioco
 def disegna():
@@ -219,4 +237,3 @@ while running:
 
 pygame.quit()
 os._exit(0)  # Anche qui, 0 indica una terminazione senza errori
-
