@@ -8,15 +8,17 @@ Il CCAT è l'anima dei nostri cittadini. Grazie a [Piero Savastano](https://www.
 
 ## Come funziona
 
-Idealmente, tutto dovrebbe essere già pronto con 3 cittadini pronti all'uso. Tuttavia, nel caso vogliate modificare o aggiungere nuovi cittadini, i passaggi sono i seguenti:
+1) avviare il file `crea_agnte_base.py`, il file creerà un [cheshire-cat-ai](https://github.com/cheshire-cat-ai/core) ottimizato per parlare con più agenti
+2) avviare il docker compose dell'`agente base`
+   - attivare uttti i plugin
+   - caricare il LLM
+   - caricare eventuali file, come per esempio la mappa o infomrazioni base dei vostri cittadini
 
-- Iniziate caricando il cheshire-cat-ai e denominatelo `agente_base`, Quest'ultimo avrà tutte le caratteristiche di base di ogni abitante. L'attuale è modificato appositamente per lo scopo, quindi consiglio di utilizzare quello attuale o copiare le modifiche per una migliore efficacia.
-
-    Una volta caricato, avviate il cheshire-cat-ai e inserite il LLM (consigliabile utilizzarne uno gratuito). Poi caricate alcune informazioni di base che volete che gli abitanti abbiano, come una mappa del luogo o dei file necessari.
-
-    **Importante**: Ogni volta che apportate modifiche all'`agente_base`, assicuratevi di eliminare le cartelle dei vostri agenti. Si ricreeranno automaticamente in futuro quando eseguirete il file `avviaDOcker.py`.
-
-- Il secondo passo è generare numerosi cheshire-cat e dare ad ognuno la propria personalità. Potete utilizzare il file [agenti.json](https://github.com/AndreaPesce2002/city-of-ccat/blob/master/caratteristiche_agenti/agenti.json)
+   **Importante**: Ogni volta che apportate modifiche all'`agente_base`, assicuratevi di eliminare le cartelle dei vostri agenti. Si ricreeranno automaticamente in futuro quando eseguirete il file `avviaDOcker.py`.
+   
+3) spegnere il docker compose dell'agente base
+   
+4) ora che abbiamo l'agente base ci baseà disegnare i nostri cittadini. Potete utilizzare il file [agenti.json](https://github.com/AndreaPesce2002/city-of-ccat/blob/master/caratteristiche_agenti/agenti.json)
   ```json
   {
     "Anna":{
@@ -43,11 +45,12 @@ Idealmente, tutto dovrebbe essere già pronto con 3 cittadini pronti all'uso. Tu
 
   Se lo desiderate, potete aggiungere dei file di testo con ulteriori descrizioni del cittadino all'interno di `caratteristica_agenti`.
 
-- Ricordatevi di aggiungere le immagini con il personaggio in `game/asset`
+5) Ricordatevi di aggiungere le immagini con il cittdino in `game/asset` e denominatelo propio col nome del cittadino (esempio `anna.png`)
 
-- Una volta aggiunti i vostri cittadini, avviate il file `avviaDOcker.py`.
+6) Una volta disegnati i vostri cittadini, avviate il file `avviaDocker.py` il programma renderà i cittadini vivi.
 
-    Il programma potrebbe dare degli errori in console, ma appaiono solo perché il programma tenta di accedere mentre il Docker si sta avviando. 
+   Il programma potrebbe dare l'`errore 104` in console, ma appaiono solo perché il programma tenta di accedere mentre il Docker si sta avviando.
+   se invece vi da altri errori come per esempio il `111` vi conviene controllare l'agente base se ha qualche problema
     
     **Attenzione:** più cittadini ci sono, più tempo ci metterà ad avviare tutti i cittadini.
 
