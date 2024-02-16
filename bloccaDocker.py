@@ -23,12 +23,13 @@ for nome_agente, dettagli in agenti_data.items():
 
         # Verifichiamo se il file docker-compose.yml esiste
         if os.path.exists(percorso_docker_compose) and os.path.isfile(percorso_docker_compose):
-            # Se il file esiste, eseguiamo il comando per avviare i servizi con docker-compose
+            # Se il file esiste, eseguiamo il comando per rimuovere i container specifici con docker-compose rm
             try:
                 subprocess.run(["docker-compose", "down"], cwd=percorso_cartella_agente, check=True)
-                print(f"Ho cloccato il docker-compose per l'agente {nome_agente}! 🐱‍🏍✨")
+                subprocess.run(["docker-compose", "rm", "-f"], cwd=percorso_cartella_agente, check=True)
+                print(f"Ho rimosso i container per l'agente {nome_agente}! 🗑️✨")
             except subprocess.CalledProcessError as e:
-                print(f"Qualcosa è andato storto nell'avvio di docker-compose per l'agente {nome_agente}: {e}")
+                print(f"Qualcosa è andato storto nella rimozione dei container per l'agente {nome_agente}: {e}")
         else:
             print(f"Il file docker-compose.yml non esiste nella cartella di {nome_agente}.")
     else:

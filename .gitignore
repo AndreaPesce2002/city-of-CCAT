@@ -6,3 +6,5 @@ agenti/Anna
 agenti/Luca
 
 test.py
+agenti/agente_base/*
+agenti/Anna/*

@@ -70,12 +70,15 @@ for nome_agente, dettagli in agenti_data.items():
 
     # Ora che il file è stato modificato, possiamo avviare il docker-compose
     try:
-        subprocess.run(["docker-compose", "up", "-d"], cwd=percorso_cartella_agente, check=True)
-        print(f"Ho avviato il docker-compose per l'agente {nome_agente} con le nuove modifiche! 🐱‍👓✨")
+        result = subprocess.run(["docker-compose", "up","--build","-d"], cwd=percorso_cartella_agente, check=True)
+        if result.returncode == 0:
+            print(f"Ho avviato il docker-compose per l'agente {nome_agente} con le nuove modifiche! 🐱‍👓✨")          
+        else:
+            print(f"Errore: docker-compose up ha restituito un codice di uscita non zero.")
     except subprocess.CalledProcessError as e:
         print(f"Qualcosa è andato storto nell'avvio di docker-compose per l'agente {nome_agente}: {e}")
         
-    #nuovo=True #temporaneo
+    #nuovo=False #temporaneo
     if nuovo:
         
         def on_open():
