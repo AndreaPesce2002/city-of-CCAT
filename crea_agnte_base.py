@@ -3,6 +3,8 @@ import shutil
 import subprocess
 from git import Repo
 import yaml
+import toml
+from packaging import version
 
 # Percorso della cartella degli agenti
 agent_folder_path = "agenti"
@@ -31,10 +33,32 @@ os.rename(os.path.join(agent_folder_path, downloaded_folder_name), os.path.join(
 shutil.rmtree(os.path.join(agent_folder_path, downloaded_folder_name, "core", "cat", "plugins"))
 shutil.copytree(os.path.join(agent_folder_path,modified_files_path, "plugins"), os.path.join(agent_folder_path, downloaded_folder_name, "core", "cat", "plugins"))
 
-# Sostituisci i file in looking_glass
-looking_glass_path = os.path.join(agent_folder_path, downloaded_folder_name, "core", "cat", "looking_glass")
-shutil.copy(os.path.join(agent_folder_path,modified_files_path, "agent_manager.py"), os.path.join(looking_glass_path, "agent_manager.py"))
-shutil.copy(os.path.join(agent_folder_path,modified_files_path, "stray_cat.py"), os.path.join(looking_glass_path, "stray_cat.py"))
+
+# Costruiamo il percorso del file pyproject.toml all'interno della cartella
+pyproject_toml_path = os.path.join(agent_folder_path, "agente_base", "core", "pyproject.toml")
+
+# Leggi la versione da pyproject.toml
+try:
+    with open(pyproject_toml_path, 'r') as file:
+        pyproject_toml_content = toml.load(file)
+        version_string = pyproject_toml_content["project"].get("version")
+except FileNotFoundError:
+    print(f"Errore: Il file {pyproject_toml_path} non è stato trovato.")
+    version_string = None
+except KeyError:
+    print("Errore: La chiave 'version' non è presente nel file pyproject.toml.")
+    version_string = None
+
+# Verifica se la versione è maggiore di 1.4.8
+if version_string and version.parse(version_string) == version.parse("1.4.8"):
+    print('La versione è coretta.')
+    # Sostituisci i file in looking_glass
+    looking_glass_path = os.path.join(agent_folder_path, downloaded_folder_name, "core", "cat", "looking_glass")
+    shutil.copy(os.path.join(agent_folder_path, modified_files_path, "agent_manager.py"), os.path.join(looking_glass_path, "agent_manager.py"))
+    shutil.copy(os.path.join(agent_folder_path, modified_files_path, "stray_cat.py"), os.path.join(looking_glass_path, "stray_cat.py"))
+else:
+    print('La versione è troppo nuova per caricare i file migliorati.')
+
 
 # Costruiamo il percorso del file docker-compose.yml all'interno della cartella
 percorso_docker_compose = os.path.join(agent_folder_path, downloaded_folder_name, 'docker-compose.yml')
