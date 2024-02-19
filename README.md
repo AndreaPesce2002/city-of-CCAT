@@ -39,9 +39,9 @@ Il CCAT è l'anima dei nostri cittadini. Grazie a [Piero Savastano](https://www.
   }
   ```
   Le informazioni importanti sono:
-      - **il nome**: deve essere sempre diverso per identificare ogni singolo abitante come un ID
-      - **la posrta**: deve essere sempre diversa tra un abitante e l'altro per consentire al CCAT di agire
-      - **il prompt_prefix**: è la descrizione di base dell'abitante, fornendo una personalità base valida per ogni dialogo.
+   - **il nome**: deve essere sempre diverso per identificare ogni singolo abitante come un ID
+   - **la posrta**: deve essere sempre diversa tra un abitante e l'altro per consentire al CCAT di agire
+   - **il prompt_prefix**: è la descrizione di base dell'abitante, fornendo una personalità base valida per ogni dialogo.
 
   Se lo desiderate, potete aggiungere dei file di testo con ulteriori descrizioni del cittadino all'interno di `caratteristica_agenti`.
 
